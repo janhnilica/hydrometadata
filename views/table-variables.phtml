@@ -1,0 +1,33 @@
+<div class="no-map-content">
+    <h1>Variables overview</h1>
+    
+    <div class="info" style="margin-bottom: 30px;">Current list of variables, introduced by users:</div>
+    
+    <table class="table-monitoring">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($variables as $var): ?>
+            <tr>
+                <td><span class="inner-label">Name:</span><?= $var["nazev"] ?></td>
+                <td>
+                    <span class="inner-label">Comment:</span>
+                    <div class="comment-area"><?= $var["poznamka"] ?></div>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+

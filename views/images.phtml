@@ -1,0 +1,26 @@
+<div class="no-map-content">
+    <div class="navigation-strip">
+        <a href="locality/<?= $locality["id_lokalita"] ?>"><?= $locality["nazev"] ?></a><span> / images</span>
+    </div>
+    
+    <h1>Images of <?= $locality["nazev"] ?></h1>
+    
+    <form style="margin: 40px 0;" method="post" enctype="multipart/form-data">
+        <span class="button" onclick="clickImagesInput();">Add images</span>
+        <input type="file" name="images[]" id="images" multiple accept=".png, .gif, .jpg, .jpeg" style="visibility: hidden;" onchange="clickSubmitImages();" >
+        <input type="submit" id="submit-images" style="visibility: hidden;" />
+    </form>
+    
+    <?php if (count($currentImages) === 0): ?>
+        <div class="info">Locality has no images</div>
+    <?php endif; ?>
+    
+    <?php foreach ($currentImages as $img): ?>
+        <div class="images-list">
+            <a href="<?php echo($pathToDir . $img . ".jpg");  ?>" rel="lightbox[reference]"><img src="<?php echo($pathToDir . "/min/" . $img . ".jpg");  ?>"></a>
+            <a href="images/<?= $locality["id_lokalita"] ?>/<?= $img ?>"><img src="images/delete_24.png" style="cursor: pointer;" title="Delete image">
+        </div>
+    <?php endforeach; ?>
+</div>
+
+

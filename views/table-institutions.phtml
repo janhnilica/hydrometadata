@@ -1,0 +1,28 @@
+<div class="no-map-content">
+    <h1>Institutions overview</h1>
+    
+    <table class="table-monitoring">
+        <thead>
+            <tr>
+                <th>Institution</th>
+                <th>Contact user</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($institutions as $inst): ?>
+            <tr>
+                <td><span class="inner-label">Institution:</span><?= $inst["nazev"] ?></td>
+                <td><span class="inner-label">Contact user:</span><?= $inst["kontaktni_uzivatel"] ?></td>
+                <td><span class="inner-label">E-mail:</span><?= $inst["email"] ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+

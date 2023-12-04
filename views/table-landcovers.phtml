@@ -1,0 +1,32 @@
+<div class="no-map-content">
+    <h1>Landcovers overview</h1>
+    
+    <div class="info" style="margin-bottom: 30px;">Current list of landcovers, introduced by users:</div>
+    
+    <table class="table-monitoring">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($landcovers as $lcv): ?>
+            <tr>
+                <td><span class="inner-label">Name:</span><?= $lcv["nazev"] ?></td>
+                <td>
+                    <span class="inner-label">Comment:</span>
+                    <div class="comment-area"><?= $lcv["poznamka"] ?></div>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+<div class="no-map-content">
+    <h1><?= $name ?></h1>
+
+    <div class="label">E-mail</div>
+    <div class="info"><?= $email ?></div>
+
+    <div class="label">Institution</div>
+    <div class="info"><?= $institution ?></div>
+
+    <div style="height: 10px;"></div>
+    
+    <fieldset>
+        <legend>Change password?</legend>
+        <form method="post">
+            <div class="label">New password*</div>
+            <input type="password" name="password" required="required" />
+
+            <div class="label">Repeat password*</div>
+            <input type="password" name="password2" required="required" />
+
+            <br>
+            <input class="button" type="submit" value="Change password" />
+        </form>
+    </fieldset>
+</div>

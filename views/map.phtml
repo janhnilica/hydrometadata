@@ -1,0 +1,47 @@
+<script>
+    function setMapHeight()
+    {
+        let header = $("#layout-header").outerHeight(true);
+        let messageWrapper = $("#user-message-wrapper").outerHeight(true);
+        $("#map-page-wrapper").outerHeight(window.innerHeight - header - messageWrapper);
+    }
+    
+    window.onresize = function()
+    {
+        setMapHeight();
+    };
+    
+    window.onload = function()
+    {
+        setMapHeight();
+        setTimeout( function() {
+            let coordinates =  [50.1, 14.4];
+            if (window.innerWidth > 500)
+                coordinates = [49.9, 15.3];
+            loadMap("map-panel", 8, coordinates);
+            createLayers(<?php echo(json_encode($institutions) . ", " . json_encode($markersData)); ?>);
+            highlightNewLocality(<?= $newLocalityId ?>);
+            showSearchResults(<?php echo(json_encode($searchResults)) ?>);
+        }, 300);
+    };
+</script>
+
+<div id="map-page-wrapper">
+    <div id="map-info-panel">
+        <div class="search-results-heading">Search results</div>
+        <div style='margin-bottom: 15px;'>
+            <span class='search-results-button' onclick='clearSearchResults();'>Clear</span>
+        </div>
+        <div style='margin-bottom: 15px;'>
+            <span class='search-results-button' onclick='saveSearchResults(<?php echo(json_encode($searchResults)) ?>);'>Save</span>
+        </div>
+    </div>
+    <div id="map-panel">
+        <div state="visible" title="Hide results" id="show-search-results-button" onclick="toggleSearchResults(this);">
+            <img src="images/left.png">
+        </div>
+    </div>
+</div>
+
+
+

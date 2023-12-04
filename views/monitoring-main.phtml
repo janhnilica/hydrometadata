@@ -1,0 +1,77 @@
+<div class="no-map-content">
+    <div class="navigation-strip">
+        <a href="locality/<?= $locality["id_lokalita"] ?>"><?= $locality["nazev"] ?></a><span> / monitoring</span>
+    </div>
+    
+    <h1><?= $locality["nazev"] ?></h1>
+    
+    <h2>Add monitored variable</h2>
+    <form method="post">
+        <div class="label">Variable*</div>
+        <select name="id_velicina">
+            <?php
+                if (!key_exists("id_velicina", $formData))
+                    $formData["id_velicina"] = null;
+                $this->printSelectOptions($variables, "id_velicina", "nazev", $formData["id_velicina"]);
+            ?>
+        </select>
+        
+        <div class="label">From*</div>
+        <select name="start">
+            <?php
+                if (!key_exists("start", $formData) || $formData["start"] === null)
+                    $formData["start"] = -1;
+                $this->printSelectOptions($fromTable, "value", "label", $formData["start"]);
+            ?>
+        </select>
+        
+        <div class="label">To*</div>
+        <select name="konec">
+            <?php
+                if (!key_exists("konec", $formData) || $formData["konec"] === null)
+                    $formData["konec"] = -1;
+                $this->printSelectOptions($toTable, "value", "label", $formData["konec"]);
+            ?>
+        </select>
+        
+        <div class="label">Comment</div>
+        <textarea name="poznamky" rows="5"><?php $this->printValueIfExists($formData, "poznamky"); ?></textarea>
+        
+        <br>
+        <input class="button" type="submit" value="Save" />
+    </form>
+    
+    <h2>Current monitoring</h2>
+    <?php if (empty($monitoring)): ?>
+        <div class="info-small">No monitored variables</div>
+    <?php else: ?>
+        <table class="table-monitoring">
+            <thead>
+                <tr>
+                    <th>Variable</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Comment</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($monitoring as $mnt): ?>
+                <tr>
+                    <td><span class="inner-label">Variable:</span><?= $mnt["variable"] ?></td>
+                    <td><span class="inner-label">From:</span><?= $mnt["start"] ?></td>
+                    <td><span class="inner-label">To:</span><?= $mnt["konec"] ?></td>
+                    <td>
+                        <span class="inner-label">Comment:</span>
+                        <div class="comment-area"><?= $mnt["poznamky"] ?></div>
+                    </td>
+                    <td>
+                        <a href="monitoring/<?= $locality["id_lokalita"] ?>/<?= $mnt["id_mereni"] ?>"><img src="images/edit_20.png" title="edit"></a>
+                        <img style="cursor: pointer;" src="images/delete_24.png" title="delete" onclick="verifyMonitoringDeletion(<?= $locality["id_lokalita"] ?>, <?= $mnt["id_mereni"] ?>);">
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
+</div>
+

@@ -1,0 +1,12 @@
+<div class="no-map-content">
+    <h1>New institution</h1>
+    
+    <form method="post">
+        <div class="label">Institution name*</div>
+        <input type="text" name="nazev" required="required" value="<?php $this->printValueIfExists($formData, "nazev"); ?>"/>
+        
+        <br>
+        <input class="button" type="submit" value="Save" />
+    </form>
+</div>
+

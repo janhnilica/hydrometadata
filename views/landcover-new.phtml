@@ -1,0 +1,23 @@
+<div class="no-map-content">
+    <h1>New landcover</h1>
+    
+    <div class="introduce-item-message">
+        <div>This dialogue instroduces a new landcover into the system.</div>
+        <div>Use it only if you can't find a required landcover in a list when creating locality.</div>
+        <div>See the <a class="reference" href="table/landcovers">current list of landcovers</a>.</div>
+    </div>
+    
+    <form method="post">
+        <div class="label">Name*</div>
+        <input type="text" name="nazev" required="required" value="<?php $this->printValueIfExists($formData, "nazev"); ?>"/>
+        
+        <div class="label">Comment</div>
+        <textarea name="poznamka" rows="5"><?= $this->printValueIfExists($formData, "poznamka"); ?></textarea>
+        
+        <br>
+        <input class="button" type="submit" value="Save" />
+    </form>
+</div>
+
+
+

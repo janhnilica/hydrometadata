@@ -1,0 +1,124 @@
+<div class="no-map-content fit-page-width-90">
+    <h1>Search</h1>
+    
+    <form method="post">
+        <fieldset>
+            <legend>Monitoring</legend>
+            <div class="search-category-wrapper">
+                <div class="search-options-conteiner">
+                    <div class="search-label">Variables</div>
+                    <div class="options">
+                        <?php $this->printCheckboxes($variables, "id_velicina", "nazev", "variable_", $formData); ?>
+                    </div>
+                </div>
+                
+                <div class="search-options-conteiner">
+                    <div class="search-label">Period of interest</div>
+                    <label class="not-indented" for="from">From</label><br>
+                    <select id="from" name="from">
+                        <?php
+                            if (!key_exists("from", $formData) || $formData["from"] === null)
+                                $formData["from"] = -1;
+                            $this->printSelectOptions($fromTable, "value", "label", $formData["from"]);
+                        ?>
+                    </select>
+                    
+                    <br><br>
+                    
+                    <label class="not-indented" for="to">To</label><br>
+                    <select id="to" name="to">
+                        <?php
+                            if (!key_exists("to", $formData) || $formData["to"] === null)
+                                $formData["to"] = -1;
+                            $this->printSelectOptions($toTable, "value", "label", $formData["to"]);
+                        ?>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Soil</legend>
+            <div class="search-category-wrapper">
+                <div class="search-options-conteiner">
+                    <div class="search-label">Soil types</div>
+                    <div class="options">
+                        <?php $this->printCheckboxes($soilTypes, "id_ptyp", "nazev", "soiltype_", $formData); ?>
+                    </div>
+                </div>
+                
+                <div class="search-options-conteiner">
+                    <div class="search-label">Soil textures</div>
+                    <div class="options">
+                        <?php $this->printCheckboxes($soilTextures, "id_pdruh", "nazev", "soiltexture_", $formData); ?>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Terrain</legend>
+            <div class="search-category-wrapper">
+                <div class="search-options-conteiner">
+                    <div class="search-label">Slopes</div>
+                    <div class="options">
+                        <?php $this->printCheckboxes($slopes, "id_sklon", "nazev", "slope_", $formData); ?>
+                    </div>
+                </div>
+                
+                <div class="search-options-conteiner">
+                    <div class="search-label">Expositions</div>
+                    <div class="options">
+                        <?php $this->printCheckboxes($expositions, "id_expozice", "nazev", "exposition_", $formData); ?>
+                    </div>
+                </div>
+                
+                <div class="search-options-conteiner">
+                    <div class="search-label">Landcovers</div>
+                    <div class="options">
+                        <?php $this->printCheckboxes($landcovers, "id_landcover", "nazev", "landcover_", $formData); ?>
+                    </div>
+                </div>
+                
+                <div class="search-options-conteiner">
+                    <div class="search-label">Altitude</div>
+                    <label for="alt-from">From</label><br>
+                    <input type="text" name="alt-from" id="alt-from" value="<?php $this->printValueIfExists($formData, "alt-from"); ?>">
+                    <br>
+                    <label for="alt-to">To</label><br>
+                    <input type="text" name="alt-to" id="alt-to" value="<?php $this->printValueIfExists($formData, "alt-to"); ?>">
+                </div>
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Meteorology</legend>
+            <div class="search-category-wrapper">
+                <div class="search-options-conteiner">
+                    <div class="search-label">Mean annual<br>precipitation</div>
+                    <label for="map-from">From</label><br>
+                    <input type="text" name="map-from" id="map-from" value="<?php $this->printValueIfExists($formData, "map-from"); ?>">
+                    <br>
+                    <label for="map-to">To</label><br>
+                    <input type="text" name="map-to" id="map-to" value="<?php $this->printValueIfExists($formData, "map-to"); ?>">
+                </div>
+                
+                <div class="search-options-conteiner">
+                    <div class="search-label">Mean annual<br>temperature</div>
+                    <label for="mat-from">From</label><br>
+                    <input type="text" name="mat-from" id="mat-from" value="<?php $this->printValueIfExists($formData, "mat-from"); ?>">
+                    <br>
+                    <label for="mat-to">To</label><br>
+                    <input type="text" name="mat-to" id="mat-to" value="<?php $this->printValueIfExists($formData, "mat-to"); ?>">
+                </div>
+            </div>
+                
+        </fieldset>
+        
+        <br>
+        <input class="button" type="submit" value="Search" />
+    </form>
+</div>
+
+
+

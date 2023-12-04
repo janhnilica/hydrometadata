@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="cs-cz">
+    <head>
+        <base href="https://hydrometadata.cz" /> <!-- <base href="https://hydrometadata.cz" />  <base href="/localhost" /> -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <meta name="author" content="Jan Hnilica">
+        <meta name="description" content="<?= $description ?>" />
+        <meta name="keywords" content="<?= $keywords ?>" />
+        <link rel="shortcut icon" href="images/favicon.png" />
+        <link rel="stylesheet" href="css/mystyle.css" type="text/css"/>
+        <link rel="stylesheet" href="js/lightbox/css/lightbox.min.css" type="text/css" media="screen" />
+        <script src="js/lightbox/js/lightbox-plus-jquery.min.js"></script>
+        <script src="js/lightbox/js/lightbox.min.js"></script>
+        <link rel="stylesheet" href="js/leaflet/leaflet.css" type="text/css" />
+        <script src="js/jquery_3_6_3_compressed.js"></script>
+        <script src="js/leaflet/leaflet.js"></script>
+        <script src="js/popupWindow.js"></script>
+        <script src="js/main-script.js"></script>
+        <script src="js/map-script.js"></script>
+        <title><?= $title ?></title>
+    </head>
+    
+    <body>
+        <header id="layout-header">
+            <nav id="menu">
+                <div id="menu-board">
+                    <a id="logo" href="map"><img src="images/logo-50.png" alt="logo"/></a>
+                    <img id="hamburger" src="images/menu-button-30.png" alt="menu" onclick="toggleMenu();"/>
+                </div>
+                
+                <div id="menu-items" is-visible="no">
+                    <div><a href="map">Map</a></div>
+                    <div>
+                        <div class="dropdown-launcher" onclick="toggleDropdown('dropdown-table');">Table</div>
+                        <div class="dropdown-menu" id="dropdown-table">
+                            <a href="table/monitoring">Monitoring</a>
+                            <a href="table/institutions">Institutions</a>
+                            <a href="table/landcovers">Landcovers</a>
+                            <a href="table/variables">Variables</a>
+                        </div>
+                    </div>
+                    <div><a href="search">Search</a></div>
+                    <div><a href="about">About</a></div>
+
+                    <?php if (!$this->verifyUser()): ?>
+                        <div><a href="log/in">Login</a></div>
+                    <?php else: ?>
+                        
+                        <div>
+                            <div class="dropdown-launcher" onclick="toggleDropdown('dropdown-create');">Create</div>
+                            <div class="dropdown-menu" id="dropdown-create">
+                                <a href="locality/new">Locality</a>
+                                <a href="landcover/new">Landcover</a>
+                                <a href="variable/new">Variable</a>
+                            </div>
+                        </div>
+                        
+                        <?php if ($this->verifyUser(true)): ?>
+                            <div><a href="admin">Admin</a></div>
+                        <?php endif ?>
+                        <div><a href="account">My account</a></div>
+                        <div><a href="log/out">Logout</a></div>
+                    <?php endif ?>
+                </div>
+            </nav>
+        </header>
+        
+        <div id="user-message-wrapper">
+            <?php foreach ($messages as $msg): ?>
+                <div class="user-message <?= $msg["class"] ?>"><?= $msg["message"] ?></div>
+            <?php endforeach ?>
+        </div>
+        
+        
+        <article>
+            <?php $this->controller->renderView(); ?>
+        </article>
+    </body>
+</html>

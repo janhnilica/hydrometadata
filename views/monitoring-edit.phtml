@@ -1,0 +1,40 @@
+<div class="no-map-content">
+    <h1><?= $locality["nazev"] ?> - monitoring update</h1>
+    
+    <form method="post">
+        <div class="label">Variable*</div>
+        <select name="id_velicina">
+            <?php
+                if (!key_exists("id_velicina", $formData))
+                    $formData["id_velicina"] = null;
+                $this->printSelectOptions($variables, "id_velicina", "nazev", $formData["id_velicina"]);
+            ?>
+        </select>
+        
+        <div class="label">From*</div>
+        <select name="start">
+            <?php
+                if (!key_exists("start", $formData) || $formData["start"] === null)
+                    $formData["start"] = -1;
+                $this->printSelectOptions($fromTable, "value", "label", $formData["start"]);
+            ?>
+        </select>
+        
+        <div class="label">To*</div>
+        <select name="konec">
+            <?php
+                if (!key_exists("konec", $formData) || $formData["konec"] === null)
+                    $formData["konec"] = -1;
+                $this->printSelectOptions($toTable, "value", "label", $formData["konec"]);
+            ?>
+        </select>
+        
+        <div class="label">Comment</div>
+        <textarea name="poznamky" rows="5"><?php $this->printValueIfExists($formData, "poznamky"); ?></textarea>
+        
+        <br>
+        <input class="button" type="submit" value="Save" />
+    </form>
+</div>
+
+

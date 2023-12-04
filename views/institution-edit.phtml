@@ -1,0 +1,14 @@
+<div class="no-map-content">
+    <h1>Edit institution</h1>
+    
+    <form method="post">
+        <div class="label">Institution name</div>
+        <input type="text" name="nazev" required="required" value="<?php $this->printValueIfExists($formData, "nazev"); ?>"/>
+        
+        <div class="label">Contact user</div>
+        <select name="id_kontaktni_uzivatel"> <?php $this->printSelectOptions($users, "id_uzivatel", "jmeno", $formData["id_kontaktni_uzivatel"], true); ?> </select>
+        
+        <br>
+        <input class="button" type="submit" value="Save" />
+    </form>
+</div>

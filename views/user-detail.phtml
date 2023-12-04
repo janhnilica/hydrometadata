@@ -1,0 +1,87 @@
+<div class="no-map-content">
+    <h1>User detail</h1>
+    
+    <div class="buttons-line-wrapper">
+        <a class="button" href="user/<?= $user["id_uzivatel"] ?>/edit">Edit user</a>
+        <span class="button button-red" onclick="verifyUserDeletion(<?= $user["id_uzivatel"] ?>);">Delete user</span>
+    </div>
+    
+    <div style="height: 10px"></div>
+    <div class="label">Name</div>
+    <div class="info"><?= $user["jmeno"] ?></div>
+    
+    <div class="label">E-mail</div>
+    <div class="info"><?= $user["email"] ?></div>
+    
+    <div class="label">Admin</div>
+    <div class="info"><?php echo($user["admin"] ? "yes" : "no"); ?></div>
+    
+    <div class="label">Institution</div>
+    <div class="info"><?= $institution ?></div>
+    
+    <h2>Activities</h2>
+    <?php if (count($activities) > 0): ?>
+        <span class="button button-red" onclick="verifyActivitiesDeletion(<?= $user["id_uzivatel"] ?>);">Delete activities</span>
+        <div style="margin-bottom: 30px;"></div>
+
+        <table class="table-presentation-small">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Activity</th>
+                    <th>IP address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($activities as $act): ?>
+                <tr>
+                    <td><?= $act["cas"] ?></td>
+                    <td><?= $act["popis"] ?></td>
+                    <td><?= $act["ip_adresa"] ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <div class="info">No activities</div>
+    <?php endif; ?>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

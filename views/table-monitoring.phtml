@@ -1,0 +1,57 @@
+<div class="no-map-content">
+    <h1>Monitoring overview</h1>
+    
+    <div style="margin-bottom: 50px;">
+        <div class="label">Filter institution</div>
+        <select onchange="filterInstitution(this);">
+            <?php $this->printSelectOptions($institutions, "nazev", "nazev", null, true, "all", "all"); ?>
+        </select>
+    </div>
+    
+    <div style="margin-bottom: 30px; font-size: 13px;">
+        <span class="reference" style="cursor: pointer;" onclick="toggleVisibilityAll(this);">Show all variables</span>
+    </div>
+    
+    <table id="overviewTable" class="table-overview">
+        <thead>
+            <tr>
+                <th>Institution</th>
+                <th>Localities</th>
+                <th>Monitored variables</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($institutions as $inst): ?>
+                <?php $instLoc = $localities[$inst["id_instituce"]]; ?>
+                <?php if(count($instLoc) > 0): ?>
+                    <?php for ($i = 0; $i < count($instLoc); $i++): ?>
+                        <tr inst="<?= $inst["nazev"] ?>">
+                            <?php if ($i === 0): ?>
+                                <td rowspan="<?= count($instLoc) ?>"><?= $inst["nazev"] ?></td>
+                            <?php endif; ?>
+                            <td>
+                                <a class="reference" href="locality/<?= $instLoc[$i]["id_lokalita"] ?>"><?= $instLoc[$i]["nazev"] ?></a>
+                            </td>
+                            <td>
+                                <div>
+                                    <?php $randId = md5(rand()); ?>
+                                    <img hider="yes" style="cursor: pointer;" src="images/expand.png" onclick="toggleVisibilityOneLocality(this, '<?= $randId ?>');">
+                                </div>
+                                <div id="<?= $randId ?>" class="invisible">
+                                    <?php foreach($monitoring[$instLoc[$i]["id_lokalita"]] as $mon): ?>
+                                        <div class="variable-name"><?= $mon ?></div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endfor; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+

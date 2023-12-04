@@ -1,0 +1,100 @@
+<div class="no-map-content fit-page-width-90">
+    <h1><?= $locality["nazev"] ?></h1>
+    <div class="info"><?= $locality["instituce"] ?></div>
+    
+    <?php if ($showEditPanel): ?>
+        <div class="buttons-line-wrapper burritos">
+            <a class="button" href="locality/<?= $locality["id_lokalita"] ?>/edit">Edit geography</a>
+            <a class="button" href="monitoring/<?= $locality["id_lokalita"] ?>">Edit monitoring</a>
+            <a class="button" href="images/<?= $locality["id_lokalita"] ?>">Edit images</a>
+        </div>
+        <span class="button button-red" onclick="verifyLocalityDeletion(<?= $locality["id_lokalita"] ?>);">Delete locality</span>
+        <div style="height: 20px;"></div>
+    <?php endif; ?>
+
+    <fieldset>
+        <legend>Location</legend>
+        <div class="label-small">Latitude</div>
+        <div class="info-small"><?= $locality["zem_sirka"] ?></div>
+        
+        <div class="label-small">Longitude</div>
+        <div class="info-small"><?= $locality["zem_delka"] ?></div>
+        
+        <div class="button" onclick="showLocalityLocation('<?= $locality["nazev"] ?>', <?= $locality["zem_sirka"] ?>, <?= $locality["zem_delka"] ?>);">Show in map</div>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Monitoring</legend>
+        <?php if (empty($monitoring)): ?>
+            <div class="info-small">No monitored variables</div>
+        <?php else: ?>
+            <table class="table-monitoring">
+                <thead>
+                    <tr>
+                        <th>Variable</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($monitoring as $mnt): ?>
+                    <tr>
+                        <td><span class="inner-label">Variable:</span><?= $mnt["variable"] ?></td>
+                        <td><span class="inner-label">From:</span><?= $mnt["start"] ?></td>
+                        <td><span class="inner-label">To:</span><?= $mnt["konec"] ?></td>
+                        <td>
+                            <span class="inner-label">Comment:</span>
+                            <div class="comment-area"><?= $mnt["poznamky"] ?></div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Geography</legend>
+        <div class="label-small">Elevation</div>
+        <div class="info-small"> <?= $locality["nadm_vyska"] ?></div>
+
+        <div class="label-small">Slope</div>
+        <div class="info-small"><?= $locality["sklon"] ?></div>
+
+        <div class="label-small">Exposition</div>
+        <div class="info-small"><?= $locality["expozice"] ?></div>
+
+        <div class="label-small">Landcover</div>
+        <div class="info-small"><?= $locality["landcover"] ?></div>
+    
+        <div class="label-small">Soil type</div>
+        <div class="info-small"> <?= $locality["pudni_typ"] ?></div>
+
+        <div class="label-small">Soil texture</div>
+        <div class="info-small"><?= $locality["pudni_druh"] ?></div>
+
+        <div class="label-small">Soil Horizons</div>
+        <div class="info-small"><?= $locality["horizonty"] ?></div>
+    
+        <div class="label-small">Mean annual precipitation</div>
+        <div class="info-small"> <?= $locality["rocni_srazky"] ?></div>
+
+        <div class="label-small">Mean annual temperature</div>
+        <div class="info-small"><?= $locality["rocni_teplota"] ?></div>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Comment</legend>
+        <textarea class="textarea-presentation" disabled><?= $locality["poznamky"] ?></textarea>
+    </fieldset>
+        
+    <fieldset>
+        <legend>Images</legend>
+        <div class="images-overview">
+            <?php foreach ($images as $img): ?>
+                <a href="<?php echo($pathToDir . $img . ".jpg");  ?>" rel="lightbox[reference]"><img src="<?php echo($pathToDir . "/min/" . $img . ".jpg");  ?>"></a>
+            <?php endforeach; ?>
+        </div>
+    </fieldset>
+</div>

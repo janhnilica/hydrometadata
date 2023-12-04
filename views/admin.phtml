@@ -1,0 +1,25 @@
+<div class="no-map-content">
+    <h1>Admin dashboard</h1>
+    
+    <h2>Institutions</h2>
+    <div class="line-wrapper-25"><a class="button" href="institution/new">Add institution</a></div>
+    <?php foreach($institutions as $inst): ?>
+        <div class="line-wrapper-15"><a class="reference" href="institution/<?= $inst["id_instituce"] ?>"><?= $inst["nazev"] ?></a></div>
+    <?php endforeach; ?>
+    
+    <h2>Users</h2>
+    <div class="line-wrapper-25"><a class="button" href="user/new">Add user</a></div>
+    <?php foreach($users as $usr): ?>
+        <div class="line-wrapper-15"><a class="reference" href="user/<?= $usr["id_uzivatel"] ?>"><?= $usr["jmeno"] ?></a></div>
+    <?php endforeach; ?>
+    
+    <h2>Errors</h2>
+    <?php if ($errors): ?>
+        <div class="line-wrapper-25"><a class="button" href="errlog/delete">Clear errlog</a></div>
+    <?php endif ?>
+    <div class="errlogcontent">
+        <?php foreach($errlog as $err): ?>
+            <div><?= $err ?></div>
+        <?php endforeach; ?>
+    </div>
+</div>

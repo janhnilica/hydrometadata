@@ -1,0 +1,96 @@
+<div class="no-map-content">
+    <h1>
+        <?php
+        if ($action === "new")
+            echo("New locality");
+        else
+            echo("Locality editation");    
+        ?>
+    </h1>
+    
+    <form method="post">
+        <div class="separator">Basic definition (required)</div>
+        
+        <div class="label">Name*</div>
+        <input type="text" name="nazev" required="required" value="<?php $this->printValueIfExists($formData, "nazev"); ?>"/>
+        
+        <fieldset>
+            <legend>Location*</legend>
+            <div class="label">Longitude* (decimal format)</div>
+            <input type="text" name="zem_delka" id="zem_delka" required="required" value="<?php $this->printValueIfExists($formData, "zem_delka"); ?>"/>
+
+            <div class="label">Latitude* (decimal format)</div>
+            <input type="text" name="zem_sirka" id="zem_sirka" required="required" value="<?php $this->printValueIfExists($formData, "zem_sirka"); ?>"/>
+            <div class="button" onclick="selectLocationDialogue();">Select from map</div>
+        </fieldset>
+        
+        <div class="separator">Additional information (optional)</div>
+        
+        <fieldset>
+            <legend>Terrain</legend>
+            <div class="label">Elevation [m.a.s.l.]</div>
+            <input type="text" name="nadm_vyska" value="<?php $this->printValueIfExists($formData, "nadm_vyska"); ?>"/>
+
+            <div class="label">Slope</div>
+            <?php
+                if (!array_key_exists("sklon", $formData) || $formData["sklon"] === null)
+                    $formData["sklon"] = -1;
+            ?>
+            <select name="sklon"> <?php $this->printSelectOptions($slopes, "id_sklon", "nazev", $formData["sklon"], true, -1, "not defined"); ?> </select>
+
+            <div class="label">Exposition</div>
+            <?php
+                if (!array_key_exists("expozice", $formData) || $formData["expozice"] === null)
+                    $formData["expozice"] = -1;
+            ?>
+            <select name="expozice"> <?php $this->printSelectOptions($expositions, "id_expozice", "nazev", $formData["expozice"], true, -1, "not defined"); ?> </select>
+            
+            <div class="label">Landcover</div>
+            <?php
+                if (!array_key_exists("landcover", $formData) || $formData["landcover"] === null)
+                    $formData["landcover"] = -1;
+            ?>
+            <select name="landcover"> <?php $this->printSelectOptions($landcovers, "id_landcover", "nazev", $formData["landcover"], true, -1, "not defined"); ?> </select>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Soil</legend>
+            <div class="label">Soil type</div>
+            <?php
+                if (!array_key_exists("pudni_typ", $formData) || $formData["pudni_typ"] === null)
+                    $formData["pudni_typ"] = -1;
+            ?>
+            <select name="pudni_typ"> <?php $this->printSelectOptions($soilTypes, "id_ptyp", "nazev", $formData["pudni_typ"], true, -1, "not defined"); ?> </select>
+
+            <div class="label">Soil texture</div>
+            <?php
+                if (!array_key_exists("pudni_druh", $formData) || $formData["pudni_druh"] === null)
+                    $formData["pudni_druh"] = -1;
+            ?>
+            <select name="pudni_druh"> <?php $this->printSelectOptions($soilTextures, "id_pdruh", "nazev", $formData["pudni_druh"], true, -1, "not defined"); ?> </select>
+
+            <div class="label">Soil horizons</div>
+            <textarea name="horizonty" rows="5" placeholder="Describe briefly soil horizons"><?php $this->printValueIfExists($formData, "horizonty"); ?></textarea>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Meteorology</legend>
+            <div class="label">Mean annual precipitation [mm]</div>
+            <input type="text" name="rocni_srazky" value="<?php $this->printValueIfExists($formData, "rocni_srazky"); ?>"/>
+
+            <div class="label">Mean annual temperature [°C]</div>
+            <input type="text" name="rocni_teplota" value="<?php $this->printValueIfExists($formData, "rocni_teplota"); ?>"/>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Comment</legend>
+            <textarea name="poznamky" rows="5"><?php $this->printValueIfExists($formData, "poznamky"); ?></textarea>
+        </fieldset>
+        
+        <br>
+        <input class="button" type="submit" value="Save" />
+    </form>
+</div>
+
+
+

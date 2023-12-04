@@ -1,0 +1,43 @@
+<div class="no-map-content">
+    <h1><?= $institution["nazev"] ?></h1>
+    
+    <div class="buttons-line-wrapper">
+        <a class="button" href="institution/<?= $institution["id_instituce"] ?>/edit">Edit institution</a>
+        <span class="button button-red" onclick="verifyInstitutionDeletion(<?= $institution["id_instituce"] ?>);">Delete institution</span>
+    </div>
+    
+    
+    <h2>Contact user</h2>
+    <?php if ($contactUser): ?>
+        <div class="label">Name</div>
+        <div class="info"><?= $contactUser["jmeno"] ?></div>
+        <div class="label">E-mail</div>
+        <div class="info"><?= $contactUser["email"] ?></div>
+    <?php else: ?>
+        <div class="info">No contact user</div>
+    <?php endif; ?>
+    
+    <h2>Users</h2>
+    <?php if ($users): ?>
+        <table class="table-presentation-small">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($users as $usr): ?>
+                <tr>
+                    <td><?= $usr["jmeno"] ?></td>
+                    <td><?= $usr["email"] ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+        </table>
+    <?php else: ?>
+        <div class="info">No users</div>
+    <?php endif; ?>
+    
+</div>
+

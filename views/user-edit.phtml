@@ -1,0 +1,31 @@
+<div class="no-map-content">
+    <h1>User editation</h1>
+    
+    <form method="post">
+        <div class="label">Name</div>
+        <input type="text" name="jmeno" required="required" value="<?php $this->printValueIfExists($formData, "jmeno"); ?>"/>
+        
+        <div class="label">E-mail</div>
+        <input type="email" name="email" required="required" value="<?php $this->printValueIfExists($formData, "email"); ?>"/>
+        
+        <div class="label">Password</div>
+        <input type="text" name="heslo" value=""/>
+        
+        <div class="label">Institution</div>
+        <select name="id_instituce">
+            <?php $this->printSelectOptions($institutions, "id_instituce", "nazev", $formData["id_instituce"]); ?>
+        </select>
+        
+        <div class="label">Admin</div>
+        <select name="admin">
+            <option value="0" <?php if ($formData["admin"] === 0) echo("selected"); ?>>No</option>
+            <option value="1" <?php if ($formData["admin"] === 1) echo("selected"); ?>>yes</option>
+        </select>
+        
+        <br>
+        <input class="button" type="submit" value="Save" />
+    </form>
+</div>
+
+
+
